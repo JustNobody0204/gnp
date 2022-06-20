@@ -23,20 +23,18 @@ $$\begin{aligned}
 \end{aligned}$$
 
 Computing the gradient of this gradient norm term in a straightforward way will involve the full computation of Hessian matrix. We introduce Taylor expansion to approximate the multiplication between the Hessian matrix and vectors, giving that
-$$\begin{aligned}
-    \nabla_{\theta}^2 L_{\mathcal{S}}(\theta)\frac{\nabla_{\theta}L_{\mathcal{S}}(\theta)}{||\nabla_{\theta}L_{\mathcal{S}}(\theta)||} \approx \frac{\nabla_{\theta}L_{\mathcal{S}}(\theta +r\frac{\nabla_{\theta}L_{\mathcal{S}}(\theta)}{||\nabla_{\theta}L_{\mathcal{S}}(\theta)||}) - \nabla_{\theta}L_{\mathcal{S}}(\theta)}{r} + \mathcal{O}(r)
-\end{aligned}$$
-where $r$ is a small scalar value. The gradient of loss could be,
+
 $$\begin{split}
-    \nabla_{\theta} L(\theta) & = \nabla_{\theta} L_{\mathcal{S}}(\theta) + \frac{\lambda}{r} \cdot (\nabla_{\theta}L_\mathcal{S}(\theta +r\frac{\nabla_{\theta}L_{\mathcal{S}}(\theta)}{||\nabla_{\theta}L_{\mathcal{S}}(\theta)||}) - \nabla_{\theta}L_\mathcal{S}(\theta)) \\
-    & = (1 - \alpha) \nabla_{\theta} L_{\mathcal{S}}(\theta) + \alpha \nabla_{\theta}L_\mathcal{S}(\theta +r\frac{\nabla_{\theta}L_{\mathcal{S}}(\theta)}{||\nabla_{\theta}L_{\mathcal{S}}(\theta)||}) 
+    \nabla_{\theta} L(\theta) & = \nabla_{\theta} L_{\mathcal{S}}(\theta) + \lambda \cdot (\frac{\nabla_{\theta}L_\mathcal{S}(\theta +r\frac{\nabla_{\theta}L_{\mathcal{S}}(\theta)}{||\nabla_{\theta}L_{\mathcal{S}}(\theta)||}) - \nabla_{\theta}L_\mathcal{S}(\theta)}{r}) \\
+    & = (1 - \frac{\lambda}{r}) \nabla_{\theta} L_{\mathcal{S}}(\theta) + \frac{\lambda}{r} \cdot \nabla_{\theta}L_\mathcal{S}(\theta +r\frac{\nabla_{\theta}L_{\mathcal{S}}(\theta)}{||\nabla_{\theta}L_{\mathcal{S}}(\theta)||}) 
 \end{split}$$
-where $\alpha = \lambda / r$. We need to set two parameters for gradient norm penalty, one for the penalty coefficient $\lambda$ and the other one for $r$.
+
+where $r$ is a small scalar value. So, we need to set two parameters for gradient norm penalty, one for the penalty coefficient $\lambda$ and the other one for $r$. And we will further use $\alpha = \lambda / r$. 
 
 ### 2. Training using this repo
 
 - This repo is realized via the JAX framework. One should start by building the python environment listed in the requirements.txt file. 
-- Training recipes are the .sh files in the Recipe folder and training confimathcal{S} are in the config folder. Training recipes will overwrite the involved confimathcal{S}. 
+- Training recipes are the .sh files in the Recipe folder and training configs are in the config folder. Training recipes will overwrite the involved configs. 
 - 
 
 
