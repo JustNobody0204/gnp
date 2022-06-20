@@ -4,7 +4,7 @@ This is our work at ICML2022, which entitles "[Penalizing Gradient Norm for Effi
 
 ### 1. Short intro
 
-##### 1. Overview
+##### 1.1 Overview
 
 Basically, to penalize gradient norm in training, an additional term regarding the gradient norm $||\nabla_{\theta} L(\theta)||_2$ will be added on top of the empirical loss, which gives that,
 
@@ -14,7 +14,7 @@ L(\theta) = L_{\mathcal{S}}(\theta) + \lambda ||\nabla_{\theta} L_{\mathcal{S}}(
 
 Gradient norm is considered a property that characterizes the flatness of the loss surface. Penalizing gradient norm motivates to bias the optimization to converge to flatter minima, leading to better model generalization. 
 
-##### 2. Practical gradient computation of gradient norm
+##### 1.2 Practical gradient computation of gradient norm
 
 Based on the chain rule, the gradient of gradient norm is,
 
@@ -29,7 +29,7 @@ $$\begin{split}
     & = (1 - \frac{\lambda}{r}) \nabla_{\theta} L_{\mathcal{S}}(\theta) + \frac{\lambda}{r} \cdot \nabla_{\theta}L_\mathcal{S}(\theta +r\frac{\nabla_{\theta}L_{\mathcal{S}}(\theta)}{||\nabla_{\theta}L_{\mathcal{S}}(\theta)||})
 \end{split}$$
  
-where is a small scalar value. So, we need to set two parameters for gradient norm penalty, one for the penalty coefficient $\lambda$ and the other one for $r$. And we will further use $\alpha = \lambda / r$. In particular, [SAM](https://github.com/google-research/sam) is a special implementation of this scheme, where $\alpha$ will always set equal to 1.
+where is a small scalar value. So, we need to set two parameters for gradient norm penalty, one for the penalty coefficient &\lambda& and the other one for $r$. And we will further use &\alpha = \lambda / r&. In particular, [SAM](https://github.com/google-research/sam) is a special implementation of this scheme, where $\alpha$ will always set equal to 1.
 
 ### 2. Training using this repo
 
@@ -38,6 +38,11 @@ where is a small scalar value. So, we need to set two parameters for gradient no
 - 
 
 
+
+
 ### 3. Some results
 
+
+
+If you find this helpful, you could cite the paper as
 
